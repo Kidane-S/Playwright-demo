@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('PageUnderTest dynamic sample', () => {
-  const homeUrl = '/';
-  const aboutUrl = '/about.html';
-  const dashboardUrl = '/dashboard.html';
-  const contactUrl = '/contact.html';
+  const homeUrl = 'https://kidane-s.github.io/Playwright-demo/';
+  const aboutUrl = 'https://kidane-s.github.io/Playwright-demo/about.html';
+  const dashboardUrl = 'https://kidane-s.github.io/Playwright-demo/dashboard.html';
+  const contactUrl = 'https://kidane-s.github.io/Playwright-demo/contact.html';
 
   test('loads the home page and has the correct title', async ({ page }) => {
     await page.goto(homeUrl);
