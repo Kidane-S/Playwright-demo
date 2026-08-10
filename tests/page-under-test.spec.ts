@@ -1,9 +1,7 @@
 import { test, expect } from '@playwright/test';
-import path from 'path';
-import { pathToFileURL } from 'url';
 
 test.describe('PageUnderTest dynamic sample', () => {
-  const baseUrl = pathToFileURL(path.join(__dirname, '../PageUnderTest')).href;
+  const baseUrl = 'https://kidane-s.github.io/Playwright-demo';
   const homeUrl = `${baseUrl}/index.html`;
   const aboutUrl = `${baseUrl}/about.html`;
   const dashboardUrl = `${baseUrl}/dashboard.html`;
