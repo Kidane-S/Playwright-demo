@@ -19,6 +19,7 @@ test.describe('PageUnderTest dynamic sample', () => {
     const modalOverlay = page.locator('#modalOverlay');
 
     await expect(counterLabel).toHaveText('Clicked 0 times');
+    
     await clickButton.click();
     await expect(counterLabel).toHaveText('Clicked 1 times');
 
