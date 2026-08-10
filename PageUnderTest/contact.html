@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Playwright Test Page</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="contact">
+  <div class="page">
+    <header class="hero">
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <h1>Contact us</h1>
+      <p class="hero-copy">Use this contact page to verify a form workflow and validation messaging.</p>
+    </header>
+
+    <main>
+      <section class="section-panel">
+        <div class="section-header">
+          <h2>Send a message</h2>
+          <p>Fill out the contact form and submit to see validation results.</p>
+        </div>
+        <form id="contactForm" class="sample-form" novalidate>
+          <label>
+            Name
+            <input id="contactName" type="text" placeholder="Your name" required />
+          </label>
+          <label>
+            Email
+            <input id="contactEmail" type="email" placeholder="you@example.com" required />
+          </label>
+          <label>
+            Message
+            <textarea id="contactMessage" placeholder="Type your message" rows="4" required></textarea>
+          </label>
+          <button type="submit" class="primary-button">Send message</button>
+          <div id="contactResult" class="form-result" aria-live="polite"></div>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Created for Playwright testing.</p>
+    </footer>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

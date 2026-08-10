@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Playwright Test Page</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="about">
+  <div class="page">
+    <header class="hero">
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <h1>About this page</h1>
+      <p class="hero-copy">This page explains the purpose of the sample application and provides a quote rotator for additional interaction.</p>
+      <button id="quoteButton" class="primary-button">Show next quote</button>
+    </header>
+
+    <main>
+      <section class="section-panel">
+        <div class="section-header">
+          <h2>Why this page exists</h2>
+          <p>It demonstrates dynamic behavior and lets tests validate navigation, UI updates, and content changes.</p>
+        </div>
+        <div class="feature-card">
+          <p id="quoteText">Automation improves repeatability and reliability.</p>
+        </div>
+      </section>
+
+      <section class="section-panel">
+        <div class="section-header">
+          <h2>How to use it</h2>
+          <ul>
+            <li>Click the quote button to rotate content.</li>
+            <li>Navigate between pages to verify active state.</li>
+            <li>Use the browser back button to ensure page links work.</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Created for Playwright testing.</p>
+    </footer>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

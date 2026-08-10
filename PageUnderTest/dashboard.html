@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | Playwright Test Page</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="dashboard">
+  <div class="page">
+    <header class="hero">
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <h1>Dashboard</h1>
+      <p class="hero-copy">This dashboard provides interactive metrics that refresh with simulated values.</p>
+      <button id="refreshMetrics" class="primary-button">Refresh metrics</button>
+    </header>
+
+    <main>
+      <section class="metric-grid">
+        <article class="metric-card">
+          <h3>Uptime</h3>
+          <div class="metric-value" id="metricValueA">--%</div>
+          <div class="metric-bar"><span class="metric-fill" id="metricFillA"></span></div>
+        </article>
+        <article class="metric-card">
+          <h3>Performance</h3>
+          <div class="metric-value" id="metricValueB">--%</div>
+          <div class="metric-bar"><span class="metric-fill" id="metricFillB"></span></div>
+        </article>
+        <article class="metric-card">
+          <h3>Coverage</h3>
+          <div class="metric-value" id="metricValueC">--%</div>
+          <div class="metric-bar"><span class="metric-fill" id="metricFillC"></span></div>
+        </article>
+      </section>
+
+      <section class="section-panel">
+        <div class="section-header">
+          <h2>Notes</h2>
+          <p>Use the refresh button to update the visual metric bars and verify responsive updates.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Created for Playwright testing.</p>
+    </footer>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Playwright Test Page</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="home">
+  <div class="page">
+    <header class="hero">
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <h1>Playwright Test Page</h1>
+      <p>Simple sample UI for HTML/CSS testing.</p>
+      <div class="hero-links">
+        <a class="primary-button" href="#features">View features</a>
+        <a class="secondary-button" href="about.html">Learn more</a>
+      </div>
+    </header>
+
+    <main>
+      <section id="features" class="features">
+        <article class="feature-card">
+          <h2>Responsive layout</h2>
+          <p>Resize the window to see the page adapt to smaller screens.</p>
+        </article>
+        <article class="feature-card">
+          <h2>Interactive button</h2>
+          <p>Use this button to verify click behavior in your tests.</p>
+          <div class="interactive-panel">
+            <p id="clickCount">Clicked 0 times</p>
+            <button id="clickCounterButton" type="button">Click me</button>
+          </div>
+        </article>
+        <article class="feature-card">
+          <h2>Theme toggle</h2>
+          <p>Current theme: <span id="themeStatus">Theme: dark</span></p>
+          <button id="themeToggle" type="button">Toggle theme</button>
+        </article>
+        <article class="feature-card">
+          <h2>Modal example</h2>
+          <button id="openModal" type="button">Open modal</button>
+          <div id="modalOverlay" class="modal-overlay" hidden>
+            <div class="modal">
+              <h2>Modal window</h2>
+              <p>This is a sample modal dialog.</p>
+              <button id="closeModal" type="button">Close modal</button>
+            </div>
+          </div>
+        </article>
+        <article class="feature-card">
+          <h2>Task manager</h2>
+          <label for="taskInput">Task title</label>
+          <input id="taskInput" type="text" placeholder="New task" />
+          <button id="addTaskButton" type="button">Add task</button>
+          <label for="filterInput">Filter tasks</label>
+          <input id="filterInput" type="text" placeholder="Filter tasks" />
+          <ul id="taskList" class="task-list"></ul>
+        </article>
+        <article class="feature-card">
+          <h2>Contact form</h2>
+          <form id="mainForm" class="sample-form" novalidate>
+            <label for="nameInput">Name</label>
+            <input id="nameInput" type="text" placeholder="Your name" />
+            <label for="emailInput">Email</label>
+            <input id="emailInput" type="email" placeholder="you@example.com" />
+            <button type="submit">Submit</button>
+            <div id="formResult" class="form-result" aria-live="polite"></div>
+          </form>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Created for Playwright testing.</p>
+    </footer>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
