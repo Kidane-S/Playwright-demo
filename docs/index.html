@@ -18,7 +18,7 @@
       <h1>Playwright Test Page</h1>
       <p>Simple sample UI for HTML/CSS testing.</p>
       <div class="hero-links">
-        <a class="primary-button" href="#features">Vew features</a>
+        <a class="primary-button" href="#features">View features</a>
         <a class="secondary-button" href="about.html">Learn more</a>
       </div>
     </header>
@@ -39,16 +39,16 @@
         </article>
         <article class="feature-card">
           <h2>Theme toggle</h2>
-          <p>Current theme: <span id="themeStatus">Theme: dark</span></p>
+          <p>Current theme: <span id="themeStatus">dark</span></p>
           <button id="themeToggle" type="button">Toggle theme</button>
         </article>
         <article class="feature-card">
           <h2>Modal example</h2>
           <button id="openModal" type="button">Open modal</button>
           <div id="modalOverlay" class="modal-overlay" hidden>
-            <div class="modal">
-              <h2>Modal window</h2>
-              <p>This is a sample modal dialog.</p>
+            <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDescription">
+              <h2 id="modalTitle">Modal window</h2>
+              <p id="modalDescription">This is a sample modal dialog.</p>
               <button id="closeModal" type="button">Close modal</button>
             </div>
           </div>

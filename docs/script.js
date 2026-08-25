@@ -11,6 +11,8 @@ const quotes = [
   'Dynamic behavior makes browser tests more valuable.',
 ];
 
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 function setActiveNav() {
   const currentPage = document.body.dataset.page || 'home';
   document.querySelectorAll('.main-nav .nav-link').forEach((link) => {
@@ -26,7 +28,7 @@ function updateHeroStatus() {
     countLabel.textContent = `Clicked ${appState.clickCount} times`;
   }
   if (themeLabel) {
-    themeLabel.textContent = `Theme: ${appState.theme}`;
+    themeLabel.textContent = appState.theme;
   }
 }
 
@@ -87,21 +89,31 @@ function setupClickCounter() {
 
 function setupModal() {
   const openModal = document.getElementById('openModal');
-  const closeModal = document.getElementById('closeModal');
+  const closeButton = document.getElementById('closeModal');
   const overlay = document.getElementById('modalOverlay');
   if (!openModal || !overlay) return;
 
+  const closeModal = () => {
+    overlay.hidden = true;
+    openModal.focus();
+  };
+
   openModal.addEventListener('click', () => {
     overlay.hidden = false;
+    closeButton?.focus();
   });
 
-  closeModal?.addEventListener('click', () => {
-    overlay.hidden = true;
-  });
+  closeButton?.addEventListener('click', closeModal);
 
   overlay.addEventListener('click', (event) => {
     if (event.target === overlay) {
-      overlay.hidden = true;
+      closeModal();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !overlay.hidden) {
+      closeModal();
     }
   });
 }
@@ -124,7 +136,7 @@ function setupMainForm() {
       return;
     }
 
-    if (!emailInput?.value.trim() || !emailInput.value.includes('@')) {
+    if (!emailInput?.value.trim() || !emailPattern.test(emailInput.value.trim())) {
       result?.classList.add('error');
       if (result) result.textContent = 'Please enter a valid email address.';
       return;
@@ -189,7 +201,7 @@ function setupContactPage() {
       return;
     }
 
-    if (!emailInput.value.includes('@')) {
+    if (!emailPattern.test(emailInput.value.trim())) {
       result?.classList.add('error');
       if (result) result.textContent = 'Please enter a valid email address.';
       return;

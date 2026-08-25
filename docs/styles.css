@@ -220,7 +220,11 @@ body.light .primary-button {
 }
 
 .sample-form button,
-#contactForm button {
+#contactForm button,
+.interactive-panel button,
+#themeToggle,
+#openModal,
+#addTaskButton {
   padding: 14px 18px;
   border: none;
   border-radius: 999px;
@@ -228,6 +232,15 @@ body.light .primary-button {
   color: white;
   font-weight: 600;
   cursor: pointer;
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--success);
+  outline-offset: 3px;
 }
 
 .task-panel {
