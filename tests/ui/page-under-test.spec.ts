@@ -32,10 +32,10 @@ test.describe('PageUnderTest dynamic sample', () => {
   test('toggles theme and updates status text', async ({ page }) => {
     await page.goto(homeUrl);
     const themeStatus = page.locator('#themeStatus');
-    await expect(themeStatus).toHaveText('Theme: dark');
+    await expect(themeStatus).toHaveText('dark');
 
     await page.getByRole('button', { name: 'Toggle theme' }).click();
-    await expect(themeStatus).toHaveText('Theme: light');
+    await expect(themeStatus).toHaveText('light');
     await expect(page.locator('body')).toHaveClass(/light/);
   });
 
