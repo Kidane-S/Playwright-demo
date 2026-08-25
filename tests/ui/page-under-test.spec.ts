@@ -39,6 +39,19 @@ test.describe('PageUnderTest dynamic sample', () => {
     await expect(page.locator('body')).toHaveClass(/light/);
   });
 
+  test('persists the selected theme after refresh and navigation', async ({ page }) => {
+    await page.goto(homeUrl);
+    await page.getByRole('button', { name: 'Toggle theme' }).click();
+
+    await page.reload();
+    await expect(page.locator('#themeStatus')).toHaveText('Theme: light');
+    await expect(page.locator('body')).toHaveClass(/light/);
+
+    await page.getByRole('link', { name: 'About' }).click();
+    await expect(page).toHaveURL(aboutUrl);
+    await expect(page.locator('body')).toHaveClass(/light/);
+  });
+
   test('task manager can add and filter tasks', async ({ page }) => {
     await page.goto(homeUrl);
     await page.getByLabel('Task title').fill('Playwright test task');
