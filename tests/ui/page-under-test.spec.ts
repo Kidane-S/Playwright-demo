@@ -7,6 +7,11 @@ test.describe('PageUnderTest dynamic sample', () => {
     await expect(page.getByRole('heading', { name: 'Playwright Test Page' })).toBeVisible();
   });
 
+  test('loads and displays the header illustration', async ({ page }) => {
+    await page.goto('./');
+    await expect(page.locator('.hero-illustration')).toBeVisible();
+  });
+
   test('click counter increments and shows modal', async ({ page }) => {
     await page.goto('./');
     const counterLabel = page.locator('#clickCount');
