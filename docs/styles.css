@@ -100,18 +100,36 @@ body.light .primary-button {
   margin-bottom: 32px;
 }
 
+.hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.hero-copy {
+  flex: 1;
+}
+
 .hero h1 {
   margin: 0;
   font-size: clamp(2.4rem, 4vw, 4.2rem);
   letter-spacing: -0.05em;
 }
 
-.hero p,
-.hero-copy {
+.hero p {
   margin: 18px auto 28px;
   max-width: 720px;
   color: var(--muted);
   line-height: 1.75;
+}
+
+.hero-illustration {
+  display: block;
+  flex: 0 1 360px;
+  width: min(100%, 360px);
+  height: auto;
+  max-height: 280px;
 }
 
 .primary-button,
@@ -327,5 +345,23 @@ textarea:focus-visible {
 
   .task-controls {
     grid-template-columns: 1fr;
+  }
+
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-copy {
+    width: 100%;
+  }
+
+  .hero p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-illustration {
+    width: min(100%, 320px);
   }
 }

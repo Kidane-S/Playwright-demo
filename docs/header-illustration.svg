@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="280" viewBox="0 0 360 280" role="img">
+  <defs>
+    <linearGradient id="window" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7fd1ff"/>
+      <stop offset="1" stop-color="#6c8cff"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5ae8a4"/>
+      <stop offset="1" stop-color="#7fd1ff"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#050916" flood-opacity=".55"/>
+    </filter>
+  </defs>
+  <circle cx="275" cy="54" r="42" fill="#6c8cff" opacity=".16"/>
+  <circle cx="72" cy="218" r="54" fill="#5ae8a4" opacity=".08"/>
+  <path d="M42 206c32-48 64-62 96-46 27 14 40 9 59-19 24-35 52-42 91-12" fill="none" stroke="#7fd1ff" stroke-dasharray="5 9" stroke-linecap="round" opacity=".45"/>
+  <g filter="url(#shadow)" transform="rotate(-5 180 140)">
+    <rect x="54" y="48" width="252" height="174" rx="20" fill="#111b38" stroke="#7fd1ff" stroke-opacity=".5" stroke-width="2"/>
+    <rect x="54" y="48" width="252" height="38" rx="20" fill="url(#window)"/>
+    <path d="M54 67h252v19H54z" fill="url(#window)"/>
+    <circle cx="78" cy="67" r="5" fill="#111b38" opacity=".7"/>
+    <circle cx="95" cy="67" r="5" fill="#111b38" opacity=".45"/>
+    <circle cx="112" cy="67" r="5" fill="#111b38" opacity=".25"/>
+    <rect x="78" y="111" width="102" height="12" rx="6" fill="#a6b0d3" opacity=".7"/>
+    <rect x="78" y="137" width="166" height="9" rx="4.5" fill="#a6b0d3" opacity=".25"/>
+    <rect x="78" y="157" width="130" height="9" rx="4.5" fill="#a6b0d3" opacity=".25"/>
+    <rect x="78" y="187" width="76" height="12" rx="6" fill="#6c8cff"/>
+    <circle cx="254" cy="174" r="28" fill="#102d35" stroke="#5ae8a4" stroke-width="2"/>
+    <path d="m241 174 9 9 18-20" fill="none" stroke="url(#glow)" stroke-linecap="round" stroke-linejoin="round" stroke-width="7"/>
+  </g>
+  <path d="m285 88 7 7 14-16" fill="none" stroke="#5ae8a4" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+</svg>
