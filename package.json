@@ -6,6 +6,7 @@
   "scripts": {
     "test": "npx playwright test && npm run k6:smoke",
     "test:api": "npx playwright test tests/api/api.spec.ts",
+    "serve:docs": "node scripts/serve-docs.js",
     "k6:smoke": "node scripts/run-k6-smoke.js",
     "clean": "node scripts/clean.js"
   },

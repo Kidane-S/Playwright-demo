@@ -1,19 +1,14 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('PageUnderTest dynamic sample', () => {
-  const homeUrl = 'https://kidane-s.github.io/Playwright-demo/';
-  const aboutUrl = 'https://kidane-s.github.io/Playwright-demo/about.html';
-  const dashboardUrl = 'https://kidane-s.github.io/Playwright-demo/dashboard.html';
-  const contactUrl = 'https://kidane-s.github.io/Playwright-demo/contact.html';
-
   test('loads the home page and has the correct title', async ({ page }) => {
-    await page.goto(homeUrl);
+    await page.goto('./');
     await expect(page).toHaveTitle('Playwright Test Page');
     await expect(page.getByRole('heading', { name: 'Playwright Test Page' })).toBeVisible();
   });
 
   test('click counter increments and shows modal', async ({ page }) => {
-    await page.goto(homeUrl);
+    await page.goto('./');
     const counterLabel = page.locator('#clickCount');
     const clickButton = page.getByRole('button', { name: 'Click me' });
     const modalOverlay = page.locator('#modalOverlay');
@@ -30,7 +25,7 @@ test.describe('PageUnderTest dynamic sample', () => {
   });
 
   test('toggles theme and updates status text', async ({ page }) => {
-    await page.goto(homeUrl);
+    await page.goto('./');
     const themeStatus = page.locator('#themeStatus');
     await expect(themeStatus).toHaveText('dark');
 
@@ -40,7 +35,7 @@ test.describe('PageUnderTest dynamic sample', () => {
   });
 
   test.skip('persists the selected theme after refresh and navigation', async ({ page }) => {
-    await page.goto(homeUrl);
+    await page.goto('./');
     await page.getByRole('button', { name: 'Toggle theme' }).click();
 
     await page.reload();
@@ -53,7 +48,7 @@ test.describe('PageUnderTest dynamic sample', () => {
   });
 
   test('task manager can add and filter tasks', async ({ page }) => {
-    await page.goto(homeUrl);
+    await page.goto('./');
     await page.getByLabel('Task title').fill('Playwright test task');
     await page.getByRole('button', { name: 'Add task' }).click();
 
@@ -68,7 +63,7 @@ test.describe('PageUnderTest dynamic sample', () => {
   });
 
   test('main form validates and shows success message', async ({ page }) => {
-    await page.goto(homeUrl);
+    await page.goto('./');
     await page.getByRole('button', { name: 'Submit' }).click();
 
     const formResult = page.locator('#formResult');
@@ -81,20 +76,20 @@ test.describe('PageUnderTest dynamic sample', () => {
   });
 
   test('navigates to subpages and verifies content', async ({ page }) => {
-    await page.goto(homeUrl);
+    await page.goto('./');
     await page.getByRole('link', { name: 'About' }).click();
-    await expect(page).toHaveURL(aboutUrl);
+    await expect(page).toHaveURL(/about\.html$/);
     await expect(page.getByRole('heading', { name: 'About this page' })).toBeVisible();
 
     await page.getByRole('link', { name: 'Dashboard' }).click();
-    await expect(page).toHaveURL(dashboardUrl);
+    await expect(page).toHaveURL(/dashboard\.html$/);
     await expect(page.getByRole('heading', { name: 'Dashboard' })).toBeVisible();
 
     await page.getByRole('button', { name: 'Refresh metrics' }).click();
     await expect(page.locator('#metricValueA')).not.toHaveText('--%');
 
     await page.getByRole('link', { name: 'Contact' }).click();
-    await expect(page).toHaveURL(contactUrl);
+    await expect(page).toHaveURL(/contact\.html$/);
     await expect(page.getByRole('heading', { name: 'Contact us' })).toBeVisible();
 
     await page.getByLabel('Name').fill('Automation User');

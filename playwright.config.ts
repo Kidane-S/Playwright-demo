@@ -1,6 +1,12 @@
 import { defineConfig, devices } from '@playwright/test';
 import { env } from 'process';
 
+const testTarget = env.TEST_TARGET || 'local';
+if (testTarget !== 'local' && testTarget !== 'online') {
+  throw new Error(`Unsupported TEST_TARGET: ${testTarget}`);
+}
+const isOnline = testTarget === 'online';
+
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -30,7 +36,9 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-    baseURL: 'https://kidane-s.github.io/Playwright-demo/',
+    baseURL: isOnline
+      ? 'https://kidane-s.github.io/Playwright-demo/'
+      : 'http://127.0.0.1:8080/',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -78,10 +86,13 @@ export default defineConfig({
     // },
   ],
 
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://localhost:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
+  ...(isOnline
+    ? {}
+    : {
+        webServer: {
+          command: 'npm run serve:docs',
+          url: 'http://127.0.0.1:8080/',
+          reuseExistingServer: !env.CI,
+        },
+      }),
 });
