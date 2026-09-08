@@ -56,6 +56,21 @@ body.light .primary-button {
   background: #3366ff;
 }
 
+body.light .sample-form input,
+body.light #contactForm input,
+body.light #contactForm textarea {
+  background: #ffffff;
+  border-color: rgba(16, 24, 40, 0.2);
+  color: #101828;
+}
+
+body.light .sample-form input::placeholder,
+body.light #contactForm input::placeholder,
+body.light #contactForm textarea::placeholder {
+  color: #475467;
+  opacity: 1;
+}
+
 .page {
   max-width: 1024px;
   margin: 0 auto;

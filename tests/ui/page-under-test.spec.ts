@@ -39,6 +39,17 @@ test.describe('PageUnderTest dynamic sample', () => {
     await expect(page.locator('body')).toHaveClass(/light/);
   });
 
+  test('keeps home form text readable in light theme', async ({ page }) => {
+    await page.goto('./');
+    await page.getByRole('button', { name: 'Toggle theme' }).click();
+
+    const nameInput = page.getByLabel('Name');
+    const emailInput = page.getByLabel('Email');
+    await expect(nameInput).toHaveCSS('color', 'rgb(16, 24, 40)');
+    await expect(emailInput).toHaveCSS('color', 'rgb(16, 24, 40)');
+    await expect(nameInput).toHaveCSS('background-color', 'rgb(255, 255, 255)');
+  });
+
   test.skip('persists the selected theme after refresh and navigation', async ({ page }) => {
     await page.goto('./');
     await page.getByRole('button', { name: 'Toggle theme' }).click();
