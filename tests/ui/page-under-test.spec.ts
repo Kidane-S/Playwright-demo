@@ -48,6 +48,8 @@ test.describe('PageUnderTest dynamic sample', () => {
     await expect(nameInput).toHaveCSS('color', 'rgb(16, 24, 40)');
     await expect(emailInput).toHaveCSS('color', 'rgb(16, 24, 40)');
     await expect(nameInput).toHaveCSS('background-color', 'rgb(255, 255, 255)');
+    await expect(page.locator('label', { hasText: 'Name' })).toHaveCSS('color', 'rgb(16, 24, 40)');
+    await expect(page.locator('label', { hasText: 'Email' })).toHaveCSS('color', 'rgb(16, 24, 40)');
   });
 
   test.skip('persists the selected theme after refresh and navigation', async ({ page }) => {
