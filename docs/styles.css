@@ -71,6 +71,11 @@ body.light #contactForm textarea::placeholder {
   opacity: 1;
 }
 
+body.light .sample-form label,
+body.light #contactForm label {
+  color: #101828;
+}
+
 .page {
   max-width: 1024px;
   margin: 0 auto;
