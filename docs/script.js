@@ -93,14 +93,35 @@ function setupModal() {
   const overlay = document.getElementById('modalOverlay');
   if (!openModal || !overlay) return;
 
+  let previouslyFocusedElement = null;
+  const getFocusableElements = () => Array.from(
+    overlay.querySelectorAll(
+      'button:not([disabled]), [href], input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )
+  ).filter((element) => !element.hasAttribute('hidden') && element.offsetParent !== null);
+
+  const focusFirstModalElement = () => {
+    const focusableElements = getFocusableElements();
+    if (focusableElements.length > 0) {
+      focusableElements[0].focus();
+      return;
+    }
+    overlay.focus();
+  };
+
   const closeModal = () => {
     overlay.hidden = true;
+    if (previouslyFocusedElement instanceof HTMLElement) {
+      previouslyFocusedElement.focus();
+      return;
+    }
     openModal.focus();
   };
 
   openModal.addEventListener('click', () => {
+    previouslyFocusedElement = document.activeElement;
     overlay.hidden = false;
-    closeButton?.focus();
+    requestAnimationFrame(focusFirstModalElement);
   });
 
   closeButton?.addEventListener('click', closeModal);
@@ -112,9 +133,34 @@ function setupModal() {
   });
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && !overlay.hidden) {
+    if (overlay.hidden) return;
+
+    if (event.key === 'Escape') {
+      event.preventDefault();
       closeModal();
+      return;
     }
+
+    if (event.key !== 'Tab') return;
+
+    const focusableElements = getFocusableElements();
+    if (focusableElements.length === 0) {
+      event.preventDefault();
+      overlay.focus();
+      return;
+    }
+
+    const currentIndex = focusableElements.indexOf(document.activeElement);
+    const nextIndex = event.shiftKey
+      ? currentIndex <= 0
+        ? focusableElements.length - 1
+        : currentIndex - 1
+      : currentIndex === focusableElements.length - 1
+        ? 0
+        : currentIndex + 1;
+
+    event.preventDefault();
+    focusableElements[nextIndex].focus();
   });
 }
 

@@ -29,6 +29,22 @@ test.describe('PageUnderTest dynamic sample', () => {
     await expect(modalOverlay).toBeHidden();
   });
 
+  test('modal keeps keyboard focus trapped while open', async ({ page }) => {
+    await page.goto('./');
+    const closeButton = page.getByRole('button', { name: 'Close modal' });
+    const modalOverlay = page.locator('#modalOverlay');
+
+    await page.getByRole('button', { name: 'Open modal' }).click();
+    await expect(modalOverlay).toBeVisible();
+    await expect(closeButton).toBeFocused();
+
+    await page.keyboard.press('Tab');
+    await expect(closeButton).toBeFocused();
+
+    await page.keyboard.press('Shift+Tab');
+    await expect(closeButton).toBeFocused();
+  });
+
   test('toggles theme and updates status text', async ({ page }) => {
     await page.goto('./');
     const themeStatus = page.locator('#themeStatus');
