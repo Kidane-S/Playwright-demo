@@ -1,0 +1,51 @@
+name: Deploy to RC
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static site
+        run: npm run build
+
+      - name: Upload RC build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: rc-build-${{ github.sha }}
+          path: ./dist
+
+  deploy-rc:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: rc
+      url: https://rc.example.com
+    steps:
+      - name: Download RC build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: rc-build-${{ github.sha }}
+          path: ./dist
+
+      - name: Deploy to RC
+        run: |
+          echo "Deploying ${{ github.sha }} to the rc environment"
+          ls -la ./dist
