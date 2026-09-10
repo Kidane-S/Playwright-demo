@@ -6,6 +6,3 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
-
-# Static build output
-/dist/
