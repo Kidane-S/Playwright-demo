@@ -2,7 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const root = path.resolve(__dirname, '..', 'docs');
+const root = path.resolve(__dirname, '..', process.env.SITE_DIR || 'docs');
 const port = Number(process.env.PORT || 8080);
 const contentTypes = {
   '.css': 'text/css',
