@@ -1,10 +1,20 @@
 name: CI and deployment gate
+
 on:
   push:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
   workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-prod
+  cancel-in-progress: false
 
 jobs:
   test:
@@ -54,13 +64,38 @@ jobs:
           path: playwright-report/
           retention-days: 30
 
-  deploy-gate:
-    name: Deployment gate
+  deploy:
+    name: Deploy Pages
     needs: test
-    if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') && needs.test.result == 'success' }}
+    if: ${{ (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'))) && needs.test.result == 'success' }}
     runs-on: ubuntu-latest
+    environment:
+      name: prod
+      url: ${{ vars.PROD_URL || 'https://kidane-s.github.io/Playwright-demo/' }}
     steps:
-      - name: Block deployment unless tests passed
-        run: |
-          echo "Tests passed in a clean CI environment."
-          echo "This is the point where deployment to rc/prod would continue."
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
