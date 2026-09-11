@@ -33,6 +33,17 @@ body.light {
   color: #101828;
 }
 
+.local-environment-banner {
+  width: 100%;
+  padding: 8px 16px;
+  background: #f79009;
+  color: #1d2939;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-align: center;
+}
+
 body.light .page,
 body.light .modal,
 body.light .metric-card,

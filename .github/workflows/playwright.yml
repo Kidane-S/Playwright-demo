@@ -99,3 +99,34 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  production-test:
+    name: Verify production site
+    needs: deploy
+    runs-on: ubuntu-latest
+    env:
+      TEST_TARGET: online
+      PROD_URL: ${{ vars.PROD_URL || 'https://kidane-s.github.io/Playwright-demo/' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright tests against production
+        run: npx playwright test
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: production-playwright-report
+          path: playwright-report/
+          retention-days: 30

@@ -13,6 +13,17 @@ const quotes = [
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+function showLocalEnvironmentBanner() {
+  const localHosts = new Set(['localhost', '127.0.0.1', '[::1]']);
+  if (!localHosts.has(window.location.hostname)) return;
+
+  const banner = document.createElement('div');
+  banner.className = 'local-environment-banner';
+  banner.setAttribute('role', 'status');
+  banner.textContent = 'LOCAL ENVIRONMENT';
+  document.body.prepend(banner);
+}
+
 function setActiveNav() {
   const currentPage = document.body.dataset.page || 'home';
   document.querySelectorAll('.main-nav .nav-link').forEach((link) => {
@@ -259,6 +270,7 @@ function setupContactPage() {
 }
 
 function initPage() {
+  showLocalEnvironmentBanner();
   setActiveNav();
   updateHeroStatus();
   setupClickCounter();
