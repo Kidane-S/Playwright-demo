@@ -5,6 +5,8 @@ const appState = {
   currentQuoteIndex: 0,
 };
 
+const THEME_STORAGE_KEY = 'playwright-demo-theme';
+
 const quotes = [
   'Automation improves repeatability and reliability.',
   'Good test pages should be easy to interact with.',
@@ -41,6 +43,14 @@ function updateHeroStatus() {
   if (themeLabel) {
     themeLabel.textContent = appState.theme;
   }
+}
+
+function initializeTheme() {
+  const savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
+  if (savedTheme === 'light' || savedTheme === 'dark') {
+    appState.theme = savedTheme;
+  }
+  document.body.classList.toggle('light', appState.theme === 'light');
 }
 
 function refreshTaskList(filter = '') {
@@ -84,6 +94,7 @@ function setupThemeToggle() {
   if (!button) return;
   button.addEventListener('click', () => {
     appState.theme = appState.theme === 'dark' ? 'light' : 'dark';
+    window.localStorage.setItem(THEME_STORAGE_KEY, appState.theme);
     document.body.classList.toggle('light', appState.theme === 'light');
     updateHeroStatus();
   });
@@ -272,6 +283,7 @@ function setupContactPage() {
 function initPage() {
   showLocalEnvironmentBanner();
   setActiveNav();
+  initializeTheme();
   updateHeroStatus();
   setupClickCounter();
   setupThemeToggle();
