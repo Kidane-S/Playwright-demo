@@ -155,6 +155,11 @@ body.light #contactForm label {
   line-height: 1.75;
 }
 
+.hero > h1 + .hero-copy {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 .hero-illustration {
   display: block;
   flex: 0 1 360px;

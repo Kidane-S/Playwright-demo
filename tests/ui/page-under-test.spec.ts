@@ -132,4 +132,15 @@ test.describe('PageUnderTest dynamic sample', () => {
     await page.getByRole('button', { name: 'Send message' }).click();
     await expect(page.locator('#contactResult')).toHaveText('Message sent! We will contact Automation User soon.');
   });
+
+  test('aligns subpage hero paragraphs beneath their headings', async ({ page }) => {
+    for (const path of ['about.html', 'dashboard.html', 'contact.html']) {
+      await page.goto(`./${path}`);
+
+      const headingLeft = await page.locator('.hero > h1').evaluate((element) => element.getBoundingClientRect().left);
+      const paragraphLeft = await page.locator('.hero > p.hero-copy').evaluate((element) => element.getBoundingClientRect().left);
+
+      expect(Math.abs(headingLeft - paragraphLeft)).toBeLessThan(1);
+    }
+  });
 });
