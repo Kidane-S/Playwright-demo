@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body data-page="dashboard">
+  <script>
+    if (localStorage.getItem('playwright-demo-theme') === 'light') document.body.classList.add('light');
+  </script>
   <div class="page">
     <header class="hero">
       <nav class="main-nav" aria-label="Primary navigation">
