@@ -68,16 +68,16 @@ test.describe('PageUnderTest dynamic sample', () => {
     await expect(page.locator('label', { hasText: 'Email' })).toHaveCSS('color', 'rgb(16, 24, 40)');
   });
 
-  test.skip('persists the selected theme after refresh and navigation', async ({ page }) => {
+  test('persists the selected theme after refresh and navigation', async ({ page }) => {
     await page.goto('./');
     await page.getByRole('button', { name: 'Toggle theme' }).click();
 
     await page.reload();
-    await expect(page.locator('#themeStatus')).toHaveText('Theme: light');
+    await expect(page.locator('#themeStatus')).toHaveText('light');
     await expect(page.locator('body')).toHaveClass(/light/);
 
     await page.getByRole('link', { name: 'About' }).click();
-    await expect(page).toHaveURL(aboutUrl);
+    await expect(page).toHaveURL(/about\.html$/);
     await expect(page.locator('body')).toHaveClass(/light/);
   });
 
