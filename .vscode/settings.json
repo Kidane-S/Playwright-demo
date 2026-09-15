@@ -1,5 +1,6 @@
 {
     "chat.tools.terminal.autoApprove": {
-        "npm run serve:docs": true
+        "npm run serve:docs": true,
+        "git worktree": true
     }
 }

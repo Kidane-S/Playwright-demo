@@ -133,6 +133,27 @@ test.describe('PageUnderTest dynamic sample', () => {
     await expect(page.locator('#contactResult')).toHaveText('Message sent! We will contact Automation User soon.');
   });
 
+  test('loads and starts the Snake game', async ({ page }) => {
+    await page.goto('./');
+    await page.getByRole('link', { name: 'Snake' }).click();
+
+    await expect(page).toHaveURL(/snake\.html$/);
+    await expect(page.getByRole('heading', { name: 'Snake' })).toBeVisible();
+    await page.getByRole('button', { name: 'Start game' }).click();
+    await expect(page.locator('#snakeStatus')).toHaveText('Game in progress');
+
+    await page.keyboard.press('Space');
+    await expect(page.locator('#snakeStatus')).toHaveText('Game paused');
+    await page.keyboard.press('Space');
+    await expect(page.locator('#snakeStatus')).toHaveText('Game in progress');
+
+    await page.waitForTimeout(2000);
+    await expect(page.locator('#snakeStatus')).toHaveText(/Game over!/);
+    await page.keyboard.press('Space');
+    await expect(page.locator('#snakeStatus')).toHaveText('Game in progress');
+    await expect(page.locator('#snakeScore')).toHaveText('0');
+  });
+
   test('aligns subpage hero paragraphs beneath their headings', async ({ page }) => {
     for (const path of ['about.html', 'dashboard.html', 'contact.html']) {
       await page.goto(`./${path}`);

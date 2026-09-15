@@ -280,6 +280,135 @@ function setupContactPage() {
   });
 }
 
+function setupSnakePage() {
+  const board = document.getElementById('snakeBoard');
+  const scoreElement = document.getElementById('snakeScore');
+  const statusElement = document.getElementById('snakeStatus');
+  const startButton = document.getElementById('snakeStartButton');
+  if (!board || !scoreElement || !statusElement || !startButton) return;
+
+  const size = 20;
+  const startingSnake = [{ x: 10, y: 10 }, { x: 9, y: 10 }, { x: 8, y: 10 }];
+  let snake = [...startingSnake];
+  let food = { x: 15, y: 10 };
+  let direction = { x: 1, y: 0 };
+  let nextDirection = { ...direction };
+  let score = 0;
+  let gameRunning = false;
+  let gamePaused = false;
+  let timerId = null;
+
+  board.innerHTML = '';
+  for (let index = 0; index < size * size; index += 1) {
+    const cell = document.createElement('div');
+    cell.className = 'snake-cell';
+    cell.setAttribute('role', 'gridcell');
+    cell.dataset.index = String(index);
+    board.appendChild(cell);
+  }
+
+  const render = () => {
+    board.querySelectorAll('.snake-cell').forEach((cell) => {
+      cell.classList.remove('snake-segment', 'snake-head', 'snake-food');
+    });
+    snake.forEach((segment, index) => {
+      const cell = board.querySelector(`[data-index="${segment.y * size + segment.x}"]`);
+      cell?.classList.add(index === 0 ? 'snake-head' : 'snake-segment');
+    });
+    board.querySelector(`[data-index="${food.y * size + food.x}"]`)?.classList.add('snake-food');
+    scoreElement.textContent = String(score);
+  };
+
+  const endGame = () => {
+    gameRunning = false;
+    if (timerId !== null) window.clearInterval(timerId);
+    timerId = null;
+    statusElement.textContent = `Game over! Final score: ${score}`;
+    startButton.textContent = 'Restart game';
+  };
+
+  const move = () => {
+    direction = nextDirection;
+    const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
+    const hitWall = head.x < 0 || head.x >= size || head.y < 0 || head.y >= size;
+    const hitSelf = snake.some((segment) => segment.x === head.x && segment.y === head.y);
+    if (hitWall || hitSelf) {
+      endGame();
+      return;
+    }
+
+    snake.unshift(head);
+    if (head.x === food.x && head.y === food.y) {
+      score += 1;
+      food = { x: (food.x + 7) % size, y: (food.y + 5) % size };
+      statusElement.textContent = `Food collected! Score: ${score}`;
+    } else {
+      snake.pop();
+    }
+    render();
+  };
+
+  const setDirection = (event) => {
+    const directions = {
+      ArrowUp: { x: 0, y: -1 },
+      w: { x: 0, y: -1 },
+      ArrowDown: { x: 0, y: 1 },
+      s: { x: 0, y: 1 },
+      ArrowLeft: { x: -1, y: 0 },
+      a: { x: -1, y: 0 },
+      ArrowRight: { x: 1, y: 0 },
+      d: { x: 1, y: 0 },
+    };
+    const requested = directions[event.key];
+    if (!requested || (requested.x === -direction.x && requested.y === -direction.y)) return;
+    event.preventDefault();
+    nextDirection = requested;
+  };
+
+  const togglePause = () => {
+    if (!gameRunning) {
+      startGame();
+      return;
+    }
+    gamePaused = !gamePaused;
+    if (gamePaused) {
+      if (timerId !== null) window.clearInterval(timerId);
+      timerId = null;
+      statusElement.textContent = 'Game paused';
+      return;
+    }
+
+    statusElement.textContent = 'Game in progress';
+    timerId = window.setInterval(move, 180);
+  };
+
+  const startGame = () => {
+    if (timerId !== null) window.clearInterval(timerId);
+    snake = [...startingSnake];
+    food = { x: 15, y: 10 };
+    direction = { x: 1, y: 0 };
+    nextDirection = { ...direction };
+    score = 0;
+    gameRunning = true;
+    gamePaused = false;
+    statusElement.textContent = 'Game in progress';
+    startButton.textContent = 'Restart game';
+    render();
+    timerId = window.setInterval(move, 180);
+  };
+
+  document.addEventListener('keydown', (event) => {
+    if (event.code === 'Space') {
+      event.preventDefault();
+      togglePause();
+      return;
+    }
+    if (gameRunning && !gamePaused) setDirection(event);
+  });
+  startButton.addEventListener('click', startGame);
+  render();
+}
+
 function initPage() {
   showLocalEnvironmentBanner();
   setActiveNav();
@@ -293,6 +422,7 @@ function initPage() {
   setupQuoteRotator();
   setupDashboardPage();
   setupContactPage();
+  setupSnakePage();
 }
 
 window.addEventListener('DOMContentLoaded', initPage);
