@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <title>About | Playwright Test Page</title>
+  <title>Snake | Playwright Test Page</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body data-page="about">
+<body data-page="snake">
   <script>
     if (localStorage.getItem('playwright-demo-theme') === 'light') document.body.classList.add('light');
   </script>
@@ -20,30 +20,26 @@
         <a href="contact.html" class="nav-link">Contact</a>
         <a href="snake.html" class="nav-link">Snake</a>
       </nav>
-      <h1>About this page</h1>
-      <p class="hero-copy">This page explains the purpose of the sample application and provides a quote rotator for additional interaction :)</p>
-      <button id="quoteButton" class="primary-button">Show next quote</button>
+      <h1>Snake</h1>
+      <p class="hero-copy">Guide the snake to the food, grow your score, and avoid the walls.</p>
     </header>
 
     <main>
-      <section class="section-panel">
+      <section class="section-panel snake-panel" aria-labelledby="snakeHeading">
         <div class="section-header">
-          <h2>Why this page exists</h2>
-          <p>It demonstrates dynamic behavior and lets tests validate navigation, UI updates, and content changes.</p>
+          <h2 id="snakeHeading">Play the game</h2>
+          <p>Use the arrow keys or W, A, S, and D to move. Press Space to pause or resume.</p>
         </div>
-        <div class="feature-card">
-          <p id="quoteText">Automation improves repeatability and reliability!</p>
-        </div>
-      </section>
-
-      <section class="section-panel">
-        <div class="section-header">
-          <h2>How to use it</h2>
-          <ul>
-            <li>Click the quote button to rotate content.</li>
-            <li>Navigate between pages to verify active state.</li>
-            <li>Use the browser back button to ensure page links work.</li>
-          </ul>
+        <div class="snake-layout">
+          <div class="snake-board-wrap">
+            <div id="snakeBoard" class="snake-board" role="grid" aria-label="Snake game board"></div>
+          </div>
+          <div class="snake-controls">
+            <p class="snake-score">Score: <span id="snakeScore">0</span></p>
+            <p id="snakeStatus" class="snake-status" role="status" aria-live="polite">Ready to play</p>
+            <button id="snakeStartButton" class="primary-button" type="button">Start game</button>
+            <p class="snake-instructions">Arrow keys or W, A, S, D move the snake. Space pauses or resumes the game.</p>
+          </div>
         </div>
       </section>
     </main>
