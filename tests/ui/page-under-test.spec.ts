@@ -113,7 +113,7 @@ test.describe('PageUnderTest dynamic sample', () => {
     await page.goto('./');
     await page.getByRole('link', { name: 'About' }).click();
     await expect(page).toHaveURL(/about\.html$/);
-    await expect(page.getByRole('heading', { name: 'Aboutthis page' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'About this page' })).toBeVisible();
 
     await page.getByRole('link', { name: 'Dashboard' }).click();
     await expect(page).toHaveURL(/dashboard\.html$/);
