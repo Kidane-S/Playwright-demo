@@ -5,7 +5,7 @@
   --surface-3: rgba(20, 27, 52, 0.82);
   --text: #f7f9ff;
   --muted: #a6b0d3;
-  --accent: #6c8cff;
+  --accent: #435fc4;
   --accent-soft: rgba(108, 140, 255, 0.18);
   --border: rgba(255, 255, 255, 0.1);
   --success: #5ae8a4;
@@ -29,6 +29,8 @@ body {
 }
 
 body.light {
+  --muted: #475467;
+  --success: #067647;
   background: #f4f6ff;
   color: #101828;
 }
