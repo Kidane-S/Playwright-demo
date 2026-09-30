@@ -302,7 +302,6 @@ function setupSnakePage() {
   for (let index = 0; index < size * size; index += 1) {
     const cell = document.createElement('div');
     cell.className = 'snake-cell';
-    cell.setAttribute('role', 'gridcell');
     cell.dataset.index = String(index);
     board.appendChild(cell);
   }

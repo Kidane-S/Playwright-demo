@@ -6,6 +6,7 @@
   "scripts": {
     "test": "npx playwright test && npm run k6:smoke",
     "test:api": "npx playwright test tests/api/api.spec.ts",
+    "test:a11y": "npx playwright test tests/a11y",
     "build": "node scripts/build-static.js",
     "serve:docs": "node scripts/serve-docs.js",
     "k6:smoke": "node scripts/run-k6-smoke.js",
@@ -16,6 +17,7 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
     "@playwright/test": "^1.62.1",
     "@types/node": "^26.2.0"
   }
